@@ -2,11 +2,11 @@ from typing import List, Optional, Dict
 
 class Product:
     ALLOWED_CONDITIONS: List[str] = ["Loose", "CIB", "New/Sealed"]
-    def __init__(self, sku, title: str, platform: str, condition: str, price: float, quantity: int) -> None:
+    def __init__(self, sku, title: str, platform: str, condition: str, price: float, quantity: int, ) -> None:
         
         formated_condition = condition.strip().title()
 
-        if formated_condition no in self.ALLOWED_CONDITIONS:
+        if formated_condition not in self.ALLOWED_CONDITIONS:
             raise ValueError(f"Invalid condition. Must be one of: {self.ALLOWED_CONDITIONS}")
         
         if quantity < 0:
@@ -20,15 +20,23 @@ class Product:
         self.quantity = quantity
 
 
-    def add_stock(count):
+    def add_stock(self, count: int):
+        if count < 0:
+            raise ValueError("Please enter a value greater than zero")
+        self.quantity += count
+    
+    def romove_stock(self,count: int):
+        if count < 0:
+            raise ValueError("Please enter a value greater than zero")
+        self.quantity -= count
+
+    def update_price(self, new_price: float) -> None:
+        if new_price < 0:
+            raise ValueError("Price cannot be less than zero")
+        self.price = new_price
+
+    def get_total_value(self):
         pass
     
-    def romove_stock(count):
-        pass
 
-    def update_price(new_price):
-        pass
-
-    def get_total_value():
-        pass
     
